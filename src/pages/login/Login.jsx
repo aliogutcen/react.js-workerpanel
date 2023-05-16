@@ -25,10 +25,14 @@ const Login = () => {
     e.preventDefault();
     AuthService.login(admin).then(
       (response) => {
-        console.log(response.data.token);
-        Cookies.set("token", response.data.token);
+        console.log(response);
 
-        window.location.replace("/");
+        if (response.data.erole == "EMPLOYEE") {
+          Cookies.set("token", response.data.token);
+          window.location.replace("/");
+        } else {
+          setLoginError(true);
+        }
       },
       () => {
         setLoginError(true);

@@ -1,10 +1,22 @@
 import "./navbar.scss";
+import React from "react";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenOutlinedIcon from "@mui/icons-material/FullscreenOutlined";
 import { Link } from "react-router-dom";
-
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import WorkerService from "../../service/WorkerService";
 const Navbar = () => {
+  const token = Cookies.get("token");
+  const [worker, setWorker] = useState({});
+
+  useEffect(() => {
+    WorkerService.getInfoForWorker(token).then((response) => {
+      setWorker({ ...worker, ...response.data });
+    });
+  }, []);
+
   return (
     <div className="navbar">
       <div className="wrapper">
@@ -23,7 +35,11 @@ const Navbar = () => {
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <div className="item">
               <img
-                src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                src={
+                  worker.image
+                    ? worker.image
+                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                }
                 className="avatar"
               />
             </div>

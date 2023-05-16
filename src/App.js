@@ -4,6 +4,7 @@ import "../src/styles/color.scss";
 import Permission from "./pages/permission/Permission";
 import PermissionAdd from "./pages/addpermission/Modal";
 import Login from "./pages/login/Login";
+
 function App() {
   return (
     <div className="App">

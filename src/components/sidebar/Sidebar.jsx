@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
 
@@ -6,17 +6,23 @@ import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 import InsertChartOutlinedSharpIcon from "@mui/icons-material/InsertChartOutlinedSharp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
+
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-
+import { useEffect } from "react";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
-import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
+import WorkerService from "../../service/WorkerService";
+import Cookies from "js-cookie";
 const Sidebar = () => {
+  const token = Cookies.get("token");
+  const [worker, setWorker] = useState({});
+  useEffect(() => {
+    WorkerService.getInfoForWorker(token).then((response) => {
+      setWorker({ ...worker, ...response.data });
+    });
+  }, []);
   return (
     <div className="sidebar">
       <div className="sidebar__top">
@@ -28,8 +34,12 @@ const Sidebar = () => {
       <div className="sidebar__center">
         <div className="sidebar__center--avatar">
           <img
-            src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-            alt="avatar"
+            src={
+              worker.image
+                ? worker.image
+                : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+            }
+            className="avatar"
           />
         </div>
         <div className="sidebar__center--menu">
@@ -78,12 +88,6 @@ const Sidebar = () => {
               <div className="list__item">
                 <FormatListNumberedIcon className="icon" />
                 <span>My Permission</span>
-              </div>
-            </Link>
-            <Link to="/permission/add" style={{ textDecoration: "none" }}>
-              <div className="list__item">
-                <FormatListBulletedOutlinedIcon className="icon" />
-                <span>Add Permission</span>
               </div>
             </Link>
           </div>

@@ -1,8 +1,8 @@
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 160 },
+  { field: "id", headerName: "ID", width: 220 },
 
   {
-    field: "permissionType",
+    field: "typeOfPermit",
     headerName: "Permission Type",
     width: 220,
   },
@@ -24,24 +24,25 @@ export const userColumns = [
   {
     field: "numberOfDays",
     headerName: "Days",
-    width: 220,
+    width: 100,
+  },
+
+  {
+    field: "approvalStatus",
+    headerName: "Status",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row.approvalStatus}`}>
+          {params.row.approvalStatus}
+        </div>
+      );
+    },
   },
   {
     field: "replyDate",
     headerName: "Reply Date",
     width: 220,
-  },
-  {
-    field: "status",
-    headerName: "Status",
-    width: 200,
-    renderCell: (params) => {
-      return (
-        <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.status}
-        </div>
-      );
-    },
   },
 ];
 
