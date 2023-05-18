@@ -1,7 +1,7 @@
 import "./dataexpense.scss";
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../dataPermission";
+import { userColumns, userRows } from "../../dataExpense";
 import { useState, useEffect, useCallback } from "react";
 import Modal from "../../pages/addpermission/Modal";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
@@ -13,6 +13,8 @@ import Cookies from "js-cookie";
 import PermissionService from "../../service/PermissionService";
 import { useDropzone } from "react-dropzone";
 import pdfIcon from "../../assets/pdfIcon.png";
+import ExpenseService from "../../service/ExpenseService";
+import { styled } from "@mui/system";
 const DataExpense = () => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
@@ -21,15 +23,16 @@ const DataExpense = () => {
   const [currencies, setCurrencies] = useState([]);
   const [selectedCurrency, setSelectedCurrency] = useState("");
 
-  const [permission, setPermission] = useState({
+  const [expense, setExpense] = useState({
     managerid: "",
-    workerid: "",
-    typeOfPermit: "",
-    startDate: "",
-    endDate: "",
-    numberOfDays: "",
     name: "",
     surname: "",
+    workerid: "",
+    expenditureType: "",
+    amountOfExpenditure: "",
+    currency: "",
+    desc: "",
+    file: [],
   });
 
   const [listPermission, setListPermission] = useState([
@@ -37,12 +40,14 @@ const DataExpense = () => {
       id: "",
       managerid: "",
       workerid: "",
-      typeOfPermit: "",
-      startDate: "",
-      endDate: "",
-      numberOfDays: "",
+      expenditureType: "",
+      amountOfExpenditure: "",
+      currency: "",
       replyDate: "",
       approvalStatus: "",
+      file: [],
+      requestDate: "",
+      desc: "",
     },
   ]);
   useEffect(() => {
@@ -61,8 +66,8 @@ const DataExpense = () => {
   }, []);
   useEffect(() => {
     if (worker.managerid && worker.id) {
-      setPermission((prevPermission) => ({
-        ...prevPermission,
+      setExpense((prevExpense) => ({
+        ...prevExpense,
         managerid: worker.managerid,
         workerid: worker.id,
         name: worker.name,
@@ -70,8 +75,10 @@ const DataExpense = () => {
       }));
     }
   }, [worker]);
+
   useEffect(() => {
-    PermissionService.getPermissionForWorker(worker.id).then((response) => {
+    ExpenseService.getallexpense(worker.id).then((response) => {
+      console.log(response);
       setListPermission([...response.data]);
     });
     return () => {
@@ -98,19 +105,21 @@ const DataExpense = () => {
 
   const handleCurrencyChange = (event) => {
     setSelectedCurrency(event.target.value);
+    setExpense({ ...expense, currency: event.target.value });
   };
 
   const handleInputChange = (event) => {
     setValue(event.target.value);
+    setExpense({ ...expense, amountOfExpenditure: event.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(permission);
-    PermissionService.createPermission(permission).then(
+    console.log(expense);
+    ExpenseService.createExpense(expense).then(
       () => {
         alert("başarılı");
-        window.location.replace("/permission");
+        window.location.replace("/expense");
       },
       () => {}
     );
@@ -119,27 +128,37 @@ const DataExpense = () => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
+      // Eğer çok fazla dosya seçilirse, limiti aşan dosyaları dikkate alma
       if (images.length + acceptedFiles.length > 5) {
-        alert("You can select 5 files in total.");
+        alert("Toplamda 5 dosya seçebilirsiniz.");
         return;
       }
+
       acceptedFiles.forEach((file) => {
         const reader = new FileReader();
+
         reader.onabort = () => console.log("Dosya okuma iptal edildi");
         reader.onerror = () => console.log("Dosya okuma hatalı");
         reader.onload = () => {
           const imgSrc = reader.result;
+
           setImages((oldImages) => [
             ...oldImages,
             { preview: imgSrc, name: file.name, type: file.type },
           ]);
+
+          // expense nesnesinin file dizisine yeni eklenen dosyaları da ekleyin
+          setExpense((oldExpense) => ({
+            ...oldExpense,
+            file: [...oldExpense.file, file],
+          }));
         };
+
         reader.readAsDataURL(file);
       });
     },
     [images]
   );
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: "image/*,application/pdf",
@@ -169,6 +188,12 @@ const DataExpense = () => {
 
   const style = isDragActive ? { ...baseStyle, ...activeStyle } : baseStyle;
 
+  const StyledDataGrid = styled(DataGrid)({
+    "& .MuiDataGrid-cell:focus": {
+      backgroundColor: "inherit",
+    },
+  });
+
   return (
     <div className="datatablee">
       <button
@@ -178,20 +203,21 @@ const DataExpense = () => {
       >
         Add Expense
       </button>
-      <DataGrid
-        className="datagrid"
-        rows={listPermission}
-        columns={userColumns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 6,
+      {listPermission.length > 0 && (
+        <StyledDataGrid
+          rows={listPermission}
+          columns={userColumns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 6,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[7]}
-        rowHeight={100}
-      />
+          }}
+          pageSizeOptions={[7]}
+          rowHeight={150}
+        />
+      )}
       <Modal show={show} handleClose={hideModal} onSubmit={handleSubmit}>
         <h2 className="h2-modal">Send Expense Request</h2>
 
@@ -200,9 +226,9 @@ const DataExpense = () => {
           <Select
             defaultValue={selectedOption}
             onChange={(e) =>
-              setPermission({
-                ...permission,
-                typeOfPermit: e.value,
+              setExpense({
+                ...expense,
+                expenditureType: e.value,
               })
             }
             options={options}
@@ -211,7 +237,17 @@ const DataExpense = () => {
         </div>
         <div className="modalForm">
           <label className="modalForm-label">Description</label>
-          <textarea className="textAreaAdvance" cols="10" rows="3"></textarea>
+          <textarea
+            className="textAreaAdvance"
+            cols="10"
+            rows="3"
+            onChange={(e) =>
+              setExpense({
+                ...expense,
+                desc: e.target.value,
+              })
+            }
+          ></textarea>
         </div>
         <div className="modalForm">
           <label className="modalForm-label">Amount</label>
@@ -222,7 +258,6 @@ const DataExpense = () => {
             value={value}
             onChange={handleInputChange}
           />
-          {/* deneme */}
         </div>
         <div className="modalForm">
           <label className="modalForm-label">Currency</label>
@@ -286,11 +321,11 @@ const DataExpense = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(event) => event.stopPropagation()}
+                    key={file.name} // Add the key prop here
                   >
                     <img
                       src={file.preview}
                       alt={`Preview ${index}`}
-                      key={file.name}
                       style={{
                         maxWidth: "100px",
                         maxHeight: "100px",
