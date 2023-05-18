@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import WorkerService from "../../service/WorkerService";
+import withAuth from "../../withAuth";
 const Navbar = () => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
@@ -50,4 +51,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withAuth(Navbar);

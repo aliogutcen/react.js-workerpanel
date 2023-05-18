@@ -3,7 +3,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./permission.scss";
 import { useState, useEffect, useContext } from "react";
-
+import withAuth from "../../withAuth";
 const Permission = () => {
   return (
     <div className="permission">
@@ -16,4 +16,4 @@ const Permission = () => {
   );
 };
 
-export default Permission;
+export default withAuth(Permission);
