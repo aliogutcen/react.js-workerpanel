@@ -11,6 +11,7 @@ import Select from "react-select";
 import WorkerService from "../../service/WorkerService";
 import Cookies from "js-cookie";
 import PermissionService from "../../service/PermissionService";
+import axios from "axios";
 const DataPermission = () => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
@@ -24,7 +25,6 @@ const DataPermission = () => {
     name: "",
     surname: "",
   });
-
   const [listPermission, setListPermission] = useState([
     {
       id: "",
@@ -40,11 +40,30 @@ const DataPermission = () => {
   ]);
 
   useEffect(() => {
-    WorkerService.getInfoForWorker(token).then((response) => {
-      console.log(response);
-      setWorker({ ...worker, ...response.data });
-    });
-  }, []);
+    const source = axios.CancelToken.source();
+
+    const fetchWorkerInfo = async () => {
+      try {
+        const response = await WorkerService.getInfoForWorker(token, {
+          cancelToken: source.token,
+        });
+        setWorker(response.data);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          console.log("An error occurred: ", error);
+        }
+      }
+    };
+
+    fetchWorkerInfo();
+
+    return () => {
+      source.cancel();
+    };
+  }, [token]);
+
   useEffect(() => {
     if (worker.managerid && worker.id) {
       setPermission((prevPermission) => ({
@@ -56,11 +75,32 @@ const DataPermission = () => {
       }));
     }
   }, [worker]);
+
   useEffect(() => {
-    PermissionService.getPermissionForWorker(worker.id).then((response) => {
-      setListPermission([...response.data]);
-    });
+    const source = axios.CancelToken.source();
+
+    const fetchPermission = async () => {
+      try {
+        const response = await PermissionService.getPermissionForWorker(
+          worker.id,
+          { cancelToken: source.token }
+        );
+        setListPermission(response.data);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          console.log("An error occurred: ", error);
+        }
+      }
+    };
+
+    if (worker.id) {
+      fetchPermission();
+    }
+
     return () => {
+      source.cancel();
       console.log("useEffect clean-up");
     };
   }, [worker]);

@@ -3,7 +3,7 @@ import Bro from "../../assets/login.png";
 import AuthService from "../../service/AuthService";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-
+import { Link } from "react-router-dom";
 const Login = () => {
   const [admin, setAdmin] = useState({
     email: "",
@@ -89,6 +89,14 @@ const Login = () => {
                 Login is incorrect please try again
               </p>
             )}
+            <div>
+              <Link
+                to="/forgot"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <span className="forgot">Forgot my password </span>
+              </Link>
+            </div>
             <div className="form__button">
               <input type="submit" className="form__submit" value="Sign-In" />
             </div>
