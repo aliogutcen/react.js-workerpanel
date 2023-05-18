@@ -6,6 +6,7 @@ import PermissionAdd from "./pages/addpermission/Modal";
 import Login from "./pages/login/Login";
 import Advance from "./pages/advance/Advance";
 import Expence from "./pages/expense/Expense";
+import Forgot from "./pages/forgot/Forgot";
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,7 @@ function App() {
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+            <Route path="forgot" element={<Forgot />} />
             {/* <Route path="profile">
               <Route index element={<Profile />} />
             </Route> */}
