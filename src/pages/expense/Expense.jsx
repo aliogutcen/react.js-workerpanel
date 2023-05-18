@@ -2,6 +2,7 @@ import "./expense.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DataExpense from "../../components/dataExpense/DataExpense";
+import withAuth from "../../withAuth";
 const Expense = () => {
   return (
     <div className="expense">
@@ -14,4 +15,4 @@ const Expense = () => {
   );
 };
 
-export default Expense;
+export default withAuth(Expense);

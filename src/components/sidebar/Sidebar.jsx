@@ -15,6 +15,8 @@ import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
 import WorkerService from "../../service/WorkerService";
 import Cookies from "js-cookie";
+import withAuth from "../../withAuth";
+import Logout from "../logout/Logout";
 const Sidebar = () => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
@@ -105,6 +107,7 @@ const Sidebar = () => {
               </Link>
               <div className="useful__item">
                 <ExitToAppIcon className="icon" />
+                <Logout />
               </div>
             </div>
           </div>
@@ -114,4 +117,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default withAuth(Sidebar);
