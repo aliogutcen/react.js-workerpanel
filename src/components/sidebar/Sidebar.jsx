@@ -17,14 +17,36 @@ import WorkerService from "../../service/WorkerService";
 import Cookies from "js-cookie";
 import withAuth from "../../withAuth";
 import Logout from "../logout/Logout";
+import axios from "axios";
 const Sidebar = () => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
   useEffect(() => {
-    WorkerService.getInfoForWorker(token).then((response) => {
-      setWorker({ ...worker, ...response.data });
-    });
-  }, []);
+    const source = axios.CancelToken.source();
+
+    const fetchWorkerInfo = async () => {
+      try {
+        const response = await WorkerService.getInfoForWorker(token, {
+          cancelToken: source.token,
+        });
+        setWorker(response.data);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          // handle error
+          console.log("An error occurred: ", error);
+        }
+      }
+    };
+
+    fetchWorkerInfo();
+
+    return () => {
+      // cancel the request if component is unmounted
+      source.cancel();
+    };
+  }, [token]); //
   return (
     <div className="sidebar">
       <div className="sidebar__top">
