@@ -3,7 +3,6 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../dataPermission";
 import { useState, useEffect } from "react";
-
 import Modal from "../../pages/addpermission/Modal";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
@@ -22,6 +21,8 @@ const DataPermission = () => {
     startDate: "",
     endDate: "",
     numberOfDays: "",
+    name: "",
+    surname: "",
   });
 
   const [listPermission, setListPermission] = useState([
@@ -40,6 +41,7 @@ const DataPermission = () => {
 
   useEffect(() => {
     WorkerService.getInfoForWorker(token).then((response) => {
+      console.log(response);
       setWorker({ ...worker, ...response.data });
     });
   }, []);
@@ -49,6 +51,8 @@ const DataPermission = () => {
         ...prevPermission,
         managerid: worker.managerid,
         workerid: worker.id,
+        name: worker.name,
+        surname: worker.surname,
       }));
     }
   }, [worker]);
