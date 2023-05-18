@@ -222,6 +222,7 @@ const DataExpense = () => {
             value={value}
             onChange={handleInputChange}
           />
+          {/* deneme */}
         </div>
         <div className="modalForm">
           <label className="modalForm-label">Currency</label>
