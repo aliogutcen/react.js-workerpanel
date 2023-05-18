@@ -4,7 +4,8 @@ import "../src/styles/color.scss";
 import Permission from "./pages/permission/Permission";
 import PermissionAdd from "./pages/addpermission/Modal";
 import Login from "./pages/login/Login";
-
+import Advance from "./pages/advance/Advance";
+import Expence from "./pages/expense/Expense";
 function App() {
   return (
     <div className="App">
@@ -22,10 +23,18 @@ function App() {
             <Route path="add">
               <Route index element={<PermissionAdd />} />
             </Route>
-            {/* <Route path="login" element={<Login />} /> */}
-            {/* <Route path="profile">
-              <Route index element={<Profile />} />
-            </Route> */}
+          </Route>
+          <Route path="expense">
+            <Route index element={<Expence />} />
+            <Route path="add">
+              <Route index element={<PermissionAdd />} />
+            </Route>
+          </Route>
+          <Route path="advance">
+            <Route index element={<Advance />} />
+            <Route path="add">
+              <Route index element={<PermissionAdd />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

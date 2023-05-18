@@ -11,6 +11,8 @@
 }
 .modal-main {
   position: fixed;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   background: rgb(255, 255, 255);
   width: 50%;
   height: auto;
@@ -45,7 +47,7 @@ button {
   width: 350px;
 }
 .modalForm {
-  margin-top: 30px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -62,6 +64,7 @@ button {
   display: flex;
   gap: 20px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .gonder {
@@ -70,7 +73,7 @@ button {
 }
 
 .h2-modal {
-  font-size: 24px;
+  font-size: 20px;
   color: var(--first-color);
 }
 .close {

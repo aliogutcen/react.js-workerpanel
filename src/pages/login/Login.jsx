@@ -29,6 +29,7 @@ const Login = () => {
 
         if (response.data.erole == "EMPLOYEE") {
           Cookies.set("token", response.data.token);
+          Cookies.set("erole", response.data.erole);
           window.location.replace("/");
         } else {
           setLoginError(true);

@@ -3,7 +3,7 @@ import axios from "axios";
 const ADD_PERMISSION =
   "http://localhost:9096/api/v1/permission/create-permission";
 
-const GET_PERMISSION = "http://localhost:9096/api/v1/permission/";
+const GET_PERMISSION = "http://localhost:9096/api/v1/permission/worker/";
 class WorkerService {
   createPermission(permission) {
     return axios.post(ADD_PERMISSION, permission);

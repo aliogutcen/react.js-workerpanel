@@ -54,16 +54,10 @@ const Sidebar = () => {
           </div>
           <div className="menu__list">
             <span className="main_span">EXPENSE</span>
-            <Link to="/employee" style={{ textDecoration: "none" }}>
+            <Link to="/expense" style={{ textDecoration: "none" }}>
               <div className="list__item">
                 <EngineeringOutlinedIcon className="icon" />
                 <span>My Expense</span>
-              </div>
-            </Link>
-            <Link to="/employee/add" style={{ textDecoration: "none" }}>
-              <div className="list__item">
-                <PersonAddOutlinedIcon className="icon" />
-                <span>Add Expense</span>
               </div>
             </Link>
           </div>
@@ -73,12 +67,6 @@ const Sidebar = () => {
               <div className="list__item">
                 <FormatListNumberedIcon className="icon" />
                 <span>My Advance</span>
-              </div>
-            </Link>
-            <Link to="/expence" style={{ textDecoration: "none" }}>
-              <div className="list__item">
-                <FormatListBulletedOutlinedIcon className="icon" />
-                <span>Add Advance</span>
               </div>
             </Link>
           </div>
