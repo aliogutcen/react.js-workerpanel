@@ -18,6 +18,8 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="forgot" element={<Forgot />} />
             <Route path="profile">
+            {/* <Route path="profile">
+
               <Route index element={<Profile />} />
             </Route>
           </Route>
