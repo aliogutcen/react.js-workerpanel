@@ -7,6 +7,7 @@ import Login from "./pages/login/Login";
 import Advance from "./pages/advance/Advance";
 import Expence from "./pages/expense/Expense";
 import Forgot from "./pages/forgot/Forgot";
+import Profile from "./pages/profile/Profile";
 function App() {
   return (
     <div className="App">
@@ -16,9 +17,11 @@ function App() {
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="forgot" element={<Forgot />} />
+            <Route path="profile">
             {/* <Route path="profile">
+
               <Route index element={<Profile />} />
-            </Route> */}
+            </Route>
           </Route>
           <Route path="permission">
             <Route index element={<Permission />} />
