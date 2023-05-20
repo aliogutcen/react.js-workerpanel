@@ -1,33 +1,32 @@
 import "./teamleader.scss";
 import Leader from "../../assets/man.png";
 import Github from "../../assets/github.png";
-import Linkedin from "../../assets/linkedin.png";
-import Mail from "../../assets/message.png";
+
+import Mail from "../../assets/casual-life-3d-open-white-envelope-with-blue-letter.png";
+import LinkedIn from "../../assets/linkedin-2.png";
+import Phone from "../../assets/3d-casual-life-messages.png";
+import SmartPhone from "../../assets/casual-life-3d-retro-phone-flying.png";
 const TeamLeader = () => {
   return (
     <div className="teamleader">
       <div className="infoteamleader">
-        <h4 className="teamleader-h4">Team Leader Information</h4>
+        <h4 className="teamleader-h4">TEAM LEADER INFORMATION</h4>
       </div>
       <div className="information-for-leader">
         <img src={Leader} alt="" className="leader" />
         <div className="information-leader">
-          <h6>MELIHCAN OZTURK</h6>
-          <p className="leader-p">Manager</p>
+          <h6 className="contact-h6">MELIHCAN OZTURK</h6>
 
           <div className="phone-mail-info">
-            <h6 className="contact-h6">Contact Details</h6>
             <div className="contact-detail">
               <img src={Mail} className="contact-icon" />
-              <p className="mail-p">0555-555-55-55</p>
+              <p className="mail-p">melihcanozturk@gmail.com</p>
             </div>
           </div>
           <div className="leader-social">
-            <h6 className="socialmedia-h6">Social Media Links</h6>
             <div className="social-media-leader">
               <img src={Github} className="social-icon" />
-              <img src={Github} className="social-icon" />
-              <img src={Github} className="social-icon" />
+              <p className="mail-p">melihcanozturk</p>
             </div>
           </div>
         </div>

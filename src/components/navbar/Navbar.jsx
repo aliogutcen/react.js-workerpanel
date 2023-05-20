@@ -14,10 +14,13 @@ import Stack from "@mui/material/Stack";
 import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import { SidebarContext } from "../../context/SidebarContext";
 
-const Navbar = () => {
+import MenuIcon from "@mui/icons-material/Menu";
+const Navbar = ({ props }) => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
+  const { toggleSidebar } = useContext(SidebarContext);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -46,8 +49,12 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
+      <div className="menu-hidden">
+        <MenuIcon className="icon" onClick={toggleSidebar}></MenuIcon>
+      </div>
       <div className="wrapper">
         <div className="items">
+          <div className="item-menu"></div>
           <div className="item">
             <LanguageOutlinedIcon className="icon" />
             English

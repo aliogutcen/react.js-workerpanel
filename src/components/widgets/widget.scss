@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
   flex: 1;
   padding: 10px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
@@ -49,4 +49,14 @@
       border-radius: 8px;
     }
   }
+}
+.widget-img {
+  height: 80px;
+  width: 80px;
+  object-fit: contain;
+}
+.widget-imga {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
 }

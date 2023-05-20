@@ -1,8 +1,17 @@
-import React from "react";
+import { createContext, useState } from "react";
 
-const SidebarContext = React.createContext({
-  isSidebarOpen: false,
-  toggleSidebar: () => {},
-});
+export const SidebarContext = createContext();
 
-export default SidebarContext;
+export const SidebarProvider = ({ children }) => {
+  const [isSidebarVisible, setSidebarVisible] = useState(true);
+
+  const toggleSidebar = () => {
+    setSidebarVisible((prevState) => !prevState);
+  };
+
+  return (
+    <SidebarContext.Provider value={{ isSidebarVisible, toggleSidebar }}>
+      {children}
+    </SidebarContext.Provider>
+  );
+};

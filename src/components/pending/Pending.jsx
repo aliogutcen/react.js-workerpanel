@@ -4,7 +4,7 @@ const Pending = () => {
   return (
     <div className="project-teams">
       <div className="team-member-info">
-        <h4 className="project-team-h4">Project Team Members</h4>
+        <h4 className="project-team-h4">PROJECT TEAM MEMBER</h4>
         <img className="team-member-image" src={TeamMember} alt="" />
       </div>
 

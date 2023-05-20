@@ -1,5 +1,5 @@
 import "./welcome.scss";
-import Person from "../../assets/08.png";
+import Person from "../../assets/3d-casual-life-young-man-in-headphones-sitting-with-laptop-and-waving.png";
 const Welcome = () => {
   return (
     <div className="welcome">

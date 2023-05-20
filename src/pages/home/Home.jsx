@@ -18,9 +18,11 @@ import TableExpense from "../../components/TableExpense/TableExpense";
 import TeamLeader from "../../components/team-leader/TeamLeader";
 
 const Home = () => {
+  const { isSidebarVisible } = useContext(SidebarContext);
+
   return (
     <div className="home ">
-      {/* <Sidebar /> */}
+      {isSidebarVisible && <Sidebar />}
       <div className="homeContainer">
         <Navbar />
         <Welcome />
@@ -28,9 +30,10 @@ const Home = () => {
           <div className="first-area">
             <div className="widgetsArea">
               <div className="widgets">
-                <Widget type="total" />
-                <Widget type="retired" />
                 <Widget type="active" />
+
+                <Widget type="retired" />
+                <Widget type="total" />
                 <Widget type="laik" />
               </div>
             </div>
@@ -44,8 +47,10 @@ const Home = () => {
             <Calender />
           </div>
         </div>
+
         <div className="third-area">
           <TeamLeader />
+
           <TableExpense />
 
           <Project />

@@ -1,8 +1,10 @@
 .navbar {
+  background-color: white;
   height: 50px;
   border-bottom: 0.5px solid rgb(233, 232, 232);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 14px;
   color: var(--first-color);
 
@@ -51,4 +53,17 @@
       }
     }
   }
+}
+
+.menu-hidden {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-left: 10px;
+}
+
+.hamurger-menu {
+  width: 48px;
+  height: 48px;
 }

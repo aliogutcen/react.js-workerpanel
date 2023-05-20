@@ -1,5 +1,5 @@
 .teamleader {
-  flex: 0.7;
+  flex: 0.75;
   background-color: white;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
@@ -24,8 +24,10 @@
 .information-leader {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  justify-content: flex-end;
+
+  gap: 15px;
+  justify-content: center;
+  margin-top: 40px;
   h6 {
     font-weight: 500;
     font-size: 16px;
@@ -48,7 +50,8 @@
 }
 .social-media-leader {
   display: flex;
-  gap: 15px;
+  align-items: flex-end;
+  gap: 5px;
 }
 .socialmedia-h6 {
   font-size: 12px;
@@ -56,25 +59,31 @@
   color: #247ba0;
 }
 .contact-h6 {
-  font-size: 12px;
-  font-weight: 400;
-  color: #fb6f92;
+  font-size: 14px;
+  font-weight: 600;
+  color: #247ba0;
 }
 .phone-mail-info {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   .contact-detail {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 5px;
-
     .contact-icon {
-      width: 24px;
-      height: 24px;
+      width: 32px;
+      height: 32px;
     }
   }
 }
 .mail-p {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.contact-icons {
+  width: 48x;
+  height: 48px;
+  margin-left: 8px;
 }

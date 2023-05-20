@@ -8,7 +8,7 @@ import Login from "./pages/login/Login";
 import Advance from "./pages/advance/Advance";
 import Expense from "./pages/expense/Expense";
 import Forgot from "./pages/forgot/Forgot";
-import SidebarProvider from "./context/SidebarProvider";
+import { SidebarProvider } from "./context/SidebarContext";
 function App() {
   return (
     <div className="app">

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap");
 
 :root {
-  --submit-color: #ff0a54;
+  --submit-color: #b2b0f7;
   --white-color: #fff;
   --black-color: #000;
 
@@ -43,9 +43,9 @@ body {
       justify-content: center;
       text-align: center;
 
-      .title {
+      .title-login {
         font-weight: bolder;
-        color: #ff0a54;
+        color: #b2b0f7;
         font-weight: bold;
         font-family: var(--body-font);
       }
@@ -111,7 +111,7 @@ body {
     .form__submit {
       padding: 0.875rem;
       color: var(--white-color);
-      background-color: var(--submit-color);
+      background-color: #b2b0f7;
       cursor: pointer;
       transition: transform 0.3s;
       width: 100px;
@@ -168,7 +168,7 @@ body {
       justify-content: center;
       .title {
         font-weight: bolder;
-        color: #ff0a54;
+        color: #b2b0f7;
         font-size: 32px;
         font-family: var(--body-font);
       }
@@ -191,6 +191,6 @@ body {
 }
 .forgot {
   font-size: 12px;
-  color: var(--submit-color);
+  color: #b2b0f7;
   text-align: start;
 }

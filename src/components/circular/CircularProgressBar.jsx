@@ -10,15 +10,17 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import Circle from "../../assets/casual-life-3d-pie-chart-5.png";
 function CircularProgressBar() {
   const percentage = 66; // ilerleme yüzdesi
 
   return (
     <div className="circu">
       <div>
-        <h4 className="circu-h4">Completion Rate </h4>
+        <h4 className="circu-h4">COMPLETION RATE </h4>
       </div>
-      <AnimatedProgressProvider
+      <img src={Circle} alt="" className="circle-bar" />
+      {/* <AnimatedProgressProvider
         valueStart={0}
         valueEnd={66}
         duration={1.4}
@@ -30,7 +32,7 @@ function CircularProgressBar() {
           return (
             <CircularProgressbar
               value={value}
-              text={`${roundedValue}%`}
+              text={`${roundedValue}%  OKAY`}
               strokeWidth={2}
               styles={{
                 path: {
@@ -50,7 +52,7 @@ function CircularProgressBar() {
             />
           );
         }}
-      </AnimatedProgressProvider>
+      </AnimatedProgressProvider> */}
     </div>
   );
 }
