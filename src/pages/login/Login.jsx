@@ -94,7 +94,7 @@ const Login = () => {
                 to="/forgot"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <span className="forgot">Forgot my password </span>
+                <p className="forgot">Forgot my password </p>
               </Link>
             </div>
             <div className="form__button">

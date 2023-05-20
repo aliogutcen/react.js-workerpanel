@@ -1,0 +1,80 @@
+.teamleader {
+  flex: 0.7;
+  background-color: white;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  .teamleader-h4 {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    color: #fb6f92;
+  }
+  .information-for-leader {
+    display: flex;
+  }
+}
+.leader {
+  width: 200px;
+  height: 200px;
+}
+
+.information-leader {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: flex-end;
+  h6 {
+    font-weight: 500;
+    font-size: 16px;
+  }
+}
+.leader-social {
+  display: flex;
+  flex-direction: column;
+}
+.leader-p {
+  text-align: start;
+}
+.social-icon {
+  width: 32px;
+  height: 32px;
+}
+.social-icon-linkedin {
+  width: 50px;
+  height: 50px;
+}
+.social-media-leader {
+  display: flex;
+  gap: 15px;
+}
+.socialmedia-h6 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #247ba0;
+}
+.contact-h6 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #fb6f92;
+}
+.phone-mail-info {
+  display: flex;
+  flex-direction: column;
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .contact-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+.mail-p {
+  font-size: 12px;
+  font-weight: 600;
+}

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
-
+import { FaBars, FaTimes } from "react-icons/fa";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 import InsertChartOutlinedSharpIcon from "@mui/icons-material/InsertChartOutlinedSharp";
@@ -18,12 +18,13 @@ import Cookies from "js-cookie";
 import withAuth from "../../withAuth";
 import Logout from "../logout/Logout";
 import axios from "axios";
+
 const Sidebar = () => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const source = axios.CancelToken.source();
-
     const fetchWorkerInfo = async () => {
       try {
         const response = await WorkerService.getInfoForWorker(token, {
@@ -34,7 +35,6 @@ const Sidebar = () => {
         if (axios.isCancel(error)) {
           console.log("Request canceled", error.message);
         } else {
-          // handle error
           console.log("An error occurred: ", error);
         }
       }
@@ -43,16 +43,14 @@ const Sidebar = () => {
     fetchWorkerInfo();
 
     return () => {
-      // cancel the request if component is unmounted
       source.cancel();
     };
   }, [token]); //
+
   return (
     <div className="sidebar">
       <div className="sidebar__top">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="sidebar__top--logo">HumanCo</span>
-        </Link>
+        <span className="sidebar__top--logo">HumanCo</span>
       </div>
 
       <div className="sidebar__center">

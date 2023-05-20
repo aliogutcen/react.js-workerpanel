@@ -1,0 +1,30 @@
+.project-time {
+  background-color: white;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  // max-width: 245px;
+  // min-width: 245px;
+  height: 240px;
+  flex: 1;
+  .project-launch-h4 {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    color: #fb6f92;
+  }
+}
+.project-time-second-area {
+  width: 140px;
+  height: 140px;
+}
+.project-time-day-area {
+  text-align: center;
+  color: #247ba0;
+  font-weight: 600;
+}

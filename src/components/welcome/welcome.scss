@@ -1,0 +1,39 @@
+.welcome {
+  background-color: white;
+  margin: 34px 40px 34px;
+  -webkit-box-shadow: 1px 2px 8px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 1px 2px 8px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+
+  .welcome-info {
+    display: flex;
+    justify-content: center;
+    gap: 250px;
+
+    .welcome-left-side {
+      padding: 34px 40px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 600px;
+      h2 {
+        font-size: 30px;
+        color: black;
+        font-weight: 600;
+      }
+      .welcome-p {
+        font-size: 16px;
+        color: rgb(10, 10, 10);
+      }
+    }
+    .welcome-right-side {
+      margin-right: 45px;
+      img {
+        height: 260px;
+      }
+    }
+  }
+}

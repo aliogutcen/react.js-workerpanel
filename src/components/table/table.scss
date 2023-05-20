@@ -1,0 +1,31 @@
+.table {
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  flex: 5;
+}
+
+.table.dark {
+  background-color: var(--dark-table-bg-color);
+}
+
+.tableCell.dark {
+  color: var(--dark-table-text-color);
+}
+
+.dark .MuiTableHead-root {
+  background-color: var(--dark-table-head-bg-color);
+}
+
+.dark .MuiTableRow-root:hover {
+  background-color: var(--dark-table-row-hover-color);
+}
+
+.tableCell.dark {
+  color: #fff;
+}
+
+.tableCell {
+  background-color: white;
+  color: red;
+}
