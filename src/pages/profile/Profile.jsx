@@ -2,7 +2,7 @@ import "./profile.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { SidebarContext } from "../../context/SidebarContext";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import ProfilePicture from "../../assets/08.png";
 import MailImage from "../../assets/casual-life-3d-open-white-envelope-with-blue-letter.png";
 import PhoneImage from "../../assets/casual-life-3d-diploma-certificate-obliquely-1.png";
@@ -16,13 +16,53 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import WorkerService from "../../service/WorkerService";
 import TableExpense from "../../components/TableExpense/TableExpense";
 import MoneyManager from "../../assets/casual-life-3d-yellow-dollar-coin-1.png";
 import TimeImage from "../../assets/3d-casual-life-blue-stopwatch.png";
+import { Link } from "react-router-dom";
 import BusinessPhone from "../../assets/casual-life-3d-retro-phone-flying.png";
 import StarImage from "../../assets/3d-fluency-christmas-star.png";
 import Illness from "../../assets/business-3d-thermometer-showing-37-celsius.png";
+import axios from "axios";
+import Cookies from "js-cookie";
+import SettingsIcon from "../../assets/settings.png";
+
 const Profile = () => {
+  const token = Cookies.get("token");
+  const [worker, setWorker] = useState({});
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    const fetchWorkerInfo = async () => {
+      try {
+        const response = await WorkerService.getInfoForWorker(token, {
+          cancelToken: source.token,
+        });
+        const worker = response.data;
+
+        const dateOfEmployment = new Date(worker.dateOfEmployment);
+        const today = new Date();
+        const diffTime = Math.abs(today - dateOfEmployment);
+        const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+        worker.yearsOfEmployment = diffYears;
+        setWorker(response.data);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          console.log("An error occurred: ", error);
+        }
+      }
+    };
+
+    fetchWorkerInfo();
+
+    return () => {
+      source.cancel();
+    };
+  }, [token]); //
+
   const data = [
     {
       name: "Dolar",
@@ -58,45 +98,71 @@ const Profile = () => {
 
         <div className="profile-info">
           <div className="profile-left-side">
-            <h4 className="profile-h4">Ali Öğütçen</h4>
+            <div className="profile-left-side-top">
+              <h4 className="profile-h4">
+                {worker.name + " " + worker.surname}
+              </h4>
+
+              <button className="settings">
+                {" "}
+                <Link to="/profile/settings" style={{ textDecoration: "none" }}>
+                  <span>Dashboard</span>
+                </Link>
+              </button>
+            </div>
+
             <div className="profile-info-summary">
               <img
                 // src={image ? URL.createObjectURL(image) : { AvatarManager }}  düzenlenecek yer
-                src={ProfilePicture}
+                src={worker.image}
                 alt=""
                 className="profile-icon"
                 onClick={handleImageClick}
               />
               <div className="summary-info-profile">
                 <div className="profile-mail">
-                  <img src={MailImage} alt="" className="profile-icon-mail" />
+                  <img
+                    src="https://res.cloudinary.com/dl7h6kct3/image/upload/v1684700543/casual-life-3d-open-white-envelope-with-blue-letter_yfsm1h.png"
+                    alt=""
+                    className="profile-icon-mail"
+                  />
                   <div className="mail-info-side">
-                    <span className="span-profile">aliogutcen@gmail.com</span>
+                    <span className="span-profile">{worker.email}</span>
                     <p className="profile-p">Email Address</p>
                   </div>
                 </div>
                 <div className="profile-mail">
-                  <img src={PhoneImage} alt="" className="profile-icon-mail" />
+                  <img
+                    src="https://res.cloudinary.com/dl7h6kct3/image/upload/c_thumb,w_200,g_face/v1684705571/casual-life-3d-diploma-certificate-obliquely-1_gtfsqw.png"
+                    alt=""
+                    className="profile-icon-mail"
+                  />
                   <div className="mail-info-side">
-                    <span className="span-profile">Software Developer</span>
+                    <span className="span-profile">{worker.occupation}</span>
                     <p className="profile-p">Jobs</p>
                   </div>
                 </div>
                 <div className="profile-mail">
                   <img
-                    src={MoneyManager}
+                    src="https://res.cloudinary.com/dl7h6kct3/image/upload/c_thumb,w_200,g_face/v1684705485/casual-life-3d-yellow-dollar-coin-1_jowhlu.png"
                     alt=""
                     className="profile-icon-mail"
                   />
                   <div className="mail-info-side">
-                    <span className="span-profile">$7000</span>
+                    <span className="span-profile">{worker.salary}</span>
                     <p className="profile-p">Salary</p>
                   </div>
                 </div>
                 <div className="profile-mail">
-                  <img src={TimeImage} alt="" className="profile-icon-mail" />
+                  <img
+                    src="https://res.cloudinary.com/dl7h6kct3/image/upload/c_thumb,w_200,g_face/v1684705633/3d-casual-life-blue-stopwatch_y0qfpk.png"
+                    alt=""
+                    className="profile-icon-mail"
+                  />
                   <div className="mail-info-side">
-                    <span className="span-profile">5 Years</span>
+                    <span className="span-profile">
+                      {worker.yearsOfEmployment + " Years "}
+                    </span>
                     <p className="profile-p">Time</p>
                   </div>
                 </div>
@@ -105,16 +171,22 @@ const Profile = () => {
 
             <div className="phone-and-adress">
               <div className="address">
-                <img src={AddressIcon} className="profile-icon-address" />
+                <img
+                  src="https://res.cloudinary.com/dl7h6kct3/image/upload/c_thumb,w_200,g_face/v1684705705/casual-life-3d-pink-location-marker_av5gke.png"
+                  className="profile-icon-address"
+                />
                 <div className="address-location">
-                  <span className="address-p">Kocaeli/Türkiye</span>
+                  <span className="address-p">{worker.address}</span>
                   <p className="address-p2">Location</p>
                 </div>
               </div>
               <div className="address-1">
-                <img src={BusinessPhone} className="profile-icon-phone" />
+                <img
+                  src="https://res.cloudinary.com/dl7h6kct3/image/upload/c_thumb,w_200,g_face/v1684705762/casual-life-3d-retro-phone-flying_axrugk.png"
+                  className="profile-icon-phone"
+                />
                 <div className="address-location">
-                  <span className="address-p">+90 553 450 21 69</span>
+                  <span className="address-p">{worker.companyPhone}</span>
                   <p className="address-p2">Phone Number</p>
                 </div>
               </div>

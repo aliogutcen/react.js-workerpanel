@@ -10,6 +10,7 @@ import Expense from "./pages/expense/Expense";
 import Forgot from "./pages/forgot/Forgot";
 import { SidebarProvider } from "./context/SidebarContext";
 import Profile from "./pages/profile/Profile";
+import Settings from "./pages/settings/Settings";
 function App() {
   return (
     <div className="app">
@@ -24,6 +25,12 @@ function App() {
               {/* <Route path="profile">
               <Route index element={<Profile />} />
             </Route> */}
+            </Route>
+            <Route path="profile">
+              <Route index element={<Profile />} />
+              <Route path="settings">
+                <Route index element={<Settings />} />
+              </Route>
             </Route>
             <Route path="permission">
               <Route index element={<Permission />} />

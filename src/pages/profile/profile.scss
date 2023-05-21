@@ -297,7 +297,7 @@
   height: auto;
 }
 .profile-icon-phone {
-  width: 50px;
+  width: 45px;
   height: auto;
 }
 .address-p {
@@ -323,4 +323,19 @@
   border-radius: 15px;
   gap: 10px;
   height: 370px;
+}
+.profile-left-side-top {
+  display: flex;
+  gap: 70px;
+}
+.settings {
+  background-color: #dad7f4;
+  height: 35px;
+  align-self: flex-end;
+  font-weight: 500;
+  color: #323232;
+  font-size: 12px;
+}
+.settings-span {
+  text-align: center;
 }

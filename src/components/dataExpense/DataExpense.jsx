@@ -15,7 +15,7 @@ import { useDropzone } from "react-dropzone";
 import pdfIcon from "../../assets/pdfIcon.png";
 import ExpenseService from "../../service/ExpenseService";
 import { styled } from "@mui/system";
-import axios from "axios";
+
 const DataExpense = () => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
@@ -129,7 +129,6 @@ const DataExpense = () => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      // Eğer çok fazla dosya seçilirse, limiti aşan dosyaları dikkate alma
       if (images.length + acceptedFiles.length > 5) {
         alert("Toplamda 5 dosya seçebilirsiniz.");
         return;

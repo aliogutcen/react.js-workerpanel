@@ -130,7 +130,13 @@ const Widget = ({ type }) => {
         title: "TOTAL EXPENSE",
         link: "See all total company",
         count: expense.length,
-        icon: <img src={WalletImage} className="widget-imga" alt="" />,
+        icon: (
+          <img
+            src="https://res.cloudinary.com/dl7h6kct3/image/upload/c_thumb,w_200,g_face/v1684705818/3d-casual-life-wallet-with-banknots-credit-card-and-coins_zaonun.png"
+            className="widget-imga"
+            alt=""
+          />
+        ),
       };
       break;
     default:

@@ -1,0 +1,235 @@
+.settings-main {
+  display: flex;
+  .settingsContainer {
+    flex: 10;
+  }
+}
+.setting-bot-side {
+  max-width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  .setting-bot-left-side {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    min-width: 70%;
+    margin: auto;
+    margin-top: 4px;
+    min-height: 50vh;
+
+    border-radius: 15px;
+  }
+  .setting-bot-right-side {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    min-width: 70%;
+    margin: auto;
+    min-height: 60vh;
+  }
+}
+
+.account-settings-about {
+  display: flex;
+  flex-direction: column;
+}
+
+.accout-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.setting-span {
+  font-size: 12px;
+}
+.settings-h6 {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.button-settings-area {
+  display: flex;
+  -webkit-box-shadow: 1px 2px 8px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 0 1.6rem 3rem rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  margin-bottom: 14px;
+  gap: 34px;
+  padding: 20px;
+}
+.button-settings {
+  height: 35px;
+  border-radius: 10px;
+  background-color: #4d69fa;
+  width: 280px;
+  text-align: center;
+  font-size: 14px; /* metin boyutunu ayarlar */
+  line-height: 50%; /* metni dikey olarak ortalar */
+  color: rgb(209, 217, 254);
+}
+.setting-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 8%;
+  object-fit: cover;
+  object-position: center;
+  -webkit-box-shadow: 1px 2px 8px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 0 1.6rem 3rem rgba(0, 0, 0, 0.1);
+}
+.choose-file {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 1px 2px 8px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 0 1.6rem 3rem rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  gap: 20px;
+  padding: 20px;
+
+  .personal-info-text {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.span-first {
+  font-weight: 600;
+  color: #b2b0f7;
+  font-size: 14px;
+}
+
+.formControl {
+  -webkit-appearance: none;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: #f8f9fa;
+  border: 0.8px solid #f8f9fa;
+
+  border-radius: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  color: #323232;
+
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 0.5;
+  padding: 0.5rem 1rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 100%;
+}
+.formControlImage {
+  -webkit-appearance: none;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+  border: var(--bs-border-width) solid #f8f9fa;
+  border-radius: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  color: #323232;
+  color: var(--bs-body-color);
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 0.5rem 1rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 100%;
+}
+input[type="file"]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #ff0a54;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #5f7191;
+}
+.form-input-area {
+  display: flex;
+  min-width: max-content;
+  gap: 34px;
+}
+.form-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  label {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.send-button {
+  border: none;
+  background-color: var(--submit-color);
+  font-weight: 500;
+
+  :focus {
+    background-color: #b2b0f7;
+  }
+}
+.send {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: -20px;
+}
+.password-form-area {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding-top: 0;
+  min-width: 70%;
+  margin: auto;
+}
+input[type="file" i] {
+  appearance: none;
+  background-color: initial;
+  cursor: default;
+  align-items: baseline;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: pre;
+  text-align: start !important;
+  padding: initial;
+  border: initial;
+  overflow: hidden !important;
+}
+
+.avatar-area {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.avatar-p {
+  font-size: 12px;
+  color: gray;
+}
