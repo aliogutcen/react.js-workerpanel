@@ -9,6 +9,7 @@ import Advance from "./pages/advance/Advance";
 import Expense from "./pages/expense/Expense";
 import Forgot from "./pages/forgot/Forgot";
 import { SidebarProvider } from "./context/SidebarContext";
+import Profile from "./pages/profile/Profile";
 function App() {
   return (
     <div className="app">
@@ -19,6 +20,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="login" element={<Login />} />
               <Route path="forgot" element={<Forgot />} />
+              <Route path="profile" element={<Profile />} />
               {/* <Route path="profile">
               <Route index element={<Profile />} />
             </Route> */}

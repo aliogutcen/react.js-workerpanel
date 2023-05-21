@@ -1,5 +1,5 @@
 import "./tableExpense.scss";
-import TeamMember from "../../assets/group.svg";
+import TeamMember from "../../assets/icons8-bill-94.png";
 const TableExpense = () => {
   return (
     <div className="expense-table">

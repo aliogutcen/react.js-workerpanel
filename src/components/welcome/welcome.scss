@@ -2,7 +2,7 @@
   background-color: white;
   margin: 34px 40px 34px;
   -webkit-box-shadow: 1px 2px 8px 1px rgba(0, 0, 0, 0.47);
-  box-shadow: 1px 2px 8px 1px rgba(201, 201, 201, 0.47);
+  box-shadow: 0 1.6rem 3rem rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   height: 260px;
   display: flex;
@@ -11,14 +11,14 @@
   .welcome-info {
     display: flex;
     justify-content: center;
-    gap: 250px;
+    gap: 200px;
 
     .welcome-left-side {
       padding: 34px 40px 34px;
       display: flex;
       flex-direction: column;
       gap: 20px;
-      width: 600px;
+      width: 700px;
       h2 {
         font-size: 30px;
         color: black;
