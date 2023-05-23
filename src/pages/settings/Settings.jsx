@@ -8,10 +8,17 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import WorkerService from "../../service/WorkerService";
 import Swal from "sweetalert2";
+import AuthService from "../../service/AuthService";
 const Settings = () => {
   const { isSidebarVisible } = useContext(SidebarContext);
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
+  const [password, setPassword] = useState({
+    current: "",
+    newpass: "",
+    repass: "",
+    authid: "",
+  });
 
   const [updateWorker, setUpdateWorker] = useState({
     token: "",
@@ -69,8 +76,47 @@ const Settings = () => {
         token: token,
         email: worker.email,
       }));
+
+      setPassword((preventDefault) => ({
+        ...preventDefault,
+        authid: worker.authid,
+      }));
     }
   }, [worker]);
+
+  const handlePassword = (event) => {
+    event.preventDefault();
+    console.log(updateWorker);
+    AuthService.changePassword(password).then(
+      (response) => {
+        if (response.data === true) {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Change password in successfully",
+          });
+          window.location.reload(true);
+        }
+      },
+      () => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+    );
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -293,7 +339,7 @@ const Settings = () => {
             </div>
           </form>
           {/* PASSWORD AREA */}
-          <form className="password-form-area">
+          <form className="password-form-area" onSubmit={handlePassword}>
             <div className="personal-info">
               <div className="contact-info">
                 <div className="personal-info-text">
@@ -302,17 +348,44 @@ const Settings = () => {
                 <div className="form-input-area">
                   <div className="form-area">
                     <label htmlFor="">Current Password</label>
-                    <input type="password" className="formControl" />
+                    <input
+                      type="password"
+                      className="formControl"
+                      onChange={(e) => {
+                        setPassword((prevWorker) => ({
+                          ...prevWorker,
+                          current: e.target.value,
+                        }));
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="form-input-area">
                   <div className="form-area">
                     <label htmlFor="">New Password</label>
-                    <input type="password" className="formControl" />
+                    <input
+                      type="password"
+                      className="formControl"
+                      onChange={(e) => {
+                        setPassword((prevWorker) => ({
+                          ...prevWorker,
+                          newpass: e.target.value,
+                        }));
+                      }}
+                    />
                   </div>
                   <div className="form-area">
                     <label htmlFor="">Confirm New Password</label>
-                    <input type="password" className="formControl" />
+                    <input
+                      type="password"
+                      className="formControl"
+                      onChange={(e) => {
+                        setPassword((prevWorker) => ({
+                          ...prevWorker,
+                          repass: e.target.value,
+                        }));
+                      }}
+                    />
                   </div>
                 </div>
               </div>

@@ -25,14 +25,14 @@ const Pending = () => {
           <td className="table-td-3">25</td>
         </tr>
         <tr className="tr">
-          <td className="table-td-1">Mehmet Yılmaz</td>
+          <td className="table-td-1">Kaan Can</td>
           <td className="table-td-2">Software Developer</td>
-          <td className="table-td-3">25</td>
+          <td className="table-td-3">22</td>
         </tr>
         <tr className="tr">
-          <td className="table-td-1">Mehmet</td>
-          <td className="table-td-2">Kara</td>
-          <td className="table-td-3">25</td>
+          <td className="table-td-1">Barış</td>
+          <td className="table-td-2">Türkmen</td>
+          <td className="table-td-3">46</td>
         </tr>
       </table>
     </div>

@@ -77,7 +77,6 @@ const Widget = ({ type }) => {
 
     return () => {
       source.cancel();
-      console.log("useEffect clean-up");
     };
   }, [worker]);
 
@@ -85,9 +84,7 @@ const Widget = ({ type }) => {
     AdvanceService.getAllAdvances(worker.id).then((response) => {
       setListAdvances([...response.data]);
     });
-    return () => {
-      console.log("useEffect clean-up");
-    };
+    return () => {};
   }, [worker]);
 
   useEffect(() => {
@@ -95,9 +92,7 @@ const Widget = ({ type }) => {
       console.log(response);
       setExpense([...response.data]);
     });
-    return () => {
-      console.log("useEffect clean-up");
-    };
+    return () => {};
   }, [worker]);
   switch (type) {
     case "total":

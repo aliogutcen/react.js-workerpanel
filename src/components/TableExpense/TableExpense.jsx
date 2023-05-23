@@ -4,6 +4,7 @@ import WorkerService from "../../service/WorkerService";
 import ExpenseService from "../../service/ExpenseService";
 import { useState, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
+import axios from "axios";
 const TableExpense = () => {
   const [worker, setWorker] = useState({});
   const token = Cookies.get("token");
@@ -31,11 +32,30 @@ const TableExpense = () => {
   }, []);
 
   useEffect(() => {
-    ExpenseService.getallexpense(worker.id).then((response) => {
-      console.log(response);
-      setListPermission([...response.data]);
-    });
+    const source = axios.CancelToken.source();
+
+    const fetchExpenses = async () => {
+      try {
+        const response = await ExpenseService.getallexpense(worker.id, {
+          cancelToken: source.token,
+        });
+        console.log(response);
+        setListPermission([...response.data]);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          console.error(error);
+        }
+      }
+    };
+
+    if (worker.id) {
+      fetchExpenses();
+    }
+
     return () => {
+      source.cancel();
       console.log("useEffect clean-up");
     };
   }, [worker]);

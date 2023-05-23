@@ -72,6 +72,22 @@ const DataAdvance = () => {
   }, [worker]);
   useEffect(() => {
     AdvanceService.getAllAdvances(worker.id).then((response) => {
+      const sortedPermissions = response.data.sort((a, b) => {
+        if (
+          a.approvalStatus === "PENDING_APPROVAL" &&
+          b.approvalStatus !== "PENDING_APPROVAL"
+        ) {
+          return -1;
+        }
+        if (
+          b.approvalStatus === "PENDING_APPROVAL" &&
+          a.approvalStatus !== "PENDING_APPROVAL"
+        ) {
+          return 1;
+        }
+        return 0;
+      });
+
       setListAdvances([...response.data]);
     });
     return () => {

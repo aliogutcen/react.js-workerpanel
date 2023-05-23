@@ -114,7 +114,11 @@ const Login = () => {
               </Link>
             </div>
             <div className="form__button">
-              <input type="submit" className="form__submit" value="Sign-In" />
+              <input
+                type="submit"
+                className="form__submit dene"
+                value="Sign-In"
+              />
             </div>
           </form>
         </div>
