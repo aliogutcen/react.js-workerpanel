@@ -79,14 +79,14 @@ const Settings = () => {
 
       setPassword((preventDefault) => ({
         ...preventDefault,
-        authid: worker.authid,
+        authid: token,
       }));
     }
   }, [worker]);
 
   const handlePassword = (event) => {
     event.preventDefault();
-    console.log(updateWorker);
+    console.log(password);
     AuthService.changePassword(password).then(
       (response) => {
         if (response.data === true) {
@@ -141,19 +141,16 @@ const Settings = () => {
 
         window.location.reload(true);
       },
-      () => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-        });
+      (response) => {
+        if (response.response.status === 405) {
+          window.location.replace("/");
+        }
       }
     );
   };
 
   const inputFileRef = useRef(null);
   const [image, setImage] = useState("");
-  // Fotoğrafı ayarlama Bölümü //
 
   const handleImageClick = () => {
     inputFileRef.current.click();

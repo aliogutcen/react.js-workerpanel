@@ -25,11 +25,13 @@ const TableExpense = () => {
   ]);
 
   useEffect(() => {
-    WorkerService.getInfoForWorker(token).then((response) => {
-      console.log(response);
-      setWorker({ ...worker, ...response.data });
-    });
-  }, []);
+    if (token) {
+      WorkerService.getInfoForWorker(token).then((response) => {
+        console.log(response);
+        setWorker({ ...worker, ...response.data });
+      });
+    }
+  }, [token]);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -63,7 +65,6 @@ const TableExpense = () => {
     <div className="expense-table">
       <div className="team-member-info">
         <h4 className="project-team-h4">My Expenses</h4>
-        <img className="team-member-image" src={TeamMember} alt="" />
       </div>
 
       <table className="tables-expense" style={{ width: "100%" }}>

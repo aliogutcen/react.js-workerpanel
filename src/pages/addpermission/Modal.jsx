@@ -11,7 +11,7 @@ const Modal = ({ handleClose, show, children, onSubmit }) => {
           <button className="gonder" type="submit">
             Send
           </button>
-          <button className="close" onClick={handleClose}>
+          <button type="button" className="close" onClick={handleClose}>
             Close
           </button>
         </div>

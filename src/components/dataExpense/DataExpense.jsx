@@ -196,7 +196,13 @@ const DataExpense = () => {
         alert("başarılı");
         window.location.replace("/expense");
       },
-      () => {}
+      (response) => {
+        if (response.response.status === 405) {
+          window.location.replace("/");
+        } else {
+          window.location.replace("/");
+        }
+      }
     );
     hideModal();
   };

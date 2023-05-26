@@ -19,81 +19,60 @@ import WorkerService from "../../service/WorkerService";
 import PermissionService from "../../service/PermissionService";
 import AdvanceService from "../../service/AdvanceService";
 import ExpenseService from "../../service/ExpenseService";
-const Widget = ({ type }) => {
-  const [adminCount, setAdminCount] = useState(0);
-  const [managerCount, setManagerCount] = useState(0);
-  const [companyCount, setCompanyCount] = useState(0);
+
+const useFetchData = (token) => {
   const [worker, setWorker] = useState({});
-  const token = Cookies.get("token");
   const [listPermission, setListPermission] = useState([{}]);
   const [listAdvance, setListAdvances] = useState([{}]);
-  let data;
   const [expense, setExpense] = useState({});
-  useEffect(() => {
+
+  const fetchData = async () => {
     const source = axios.CancelToken.source();
 
-    const fetchWorkerInfo = async () => {
-      try {
-        const response = await WorkerService.getInfoForWorker(token, {
-          cancelToken: source.token,
-        });
-        setWorker(response.data);
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log("Request canceled", error.message);
-        } else {
-          console.log("An error occurred: ", error);
-        }
+    try {
+      const workerResponse = await WorkerService.getInfoForWorker(token, {
+        cancelToken: source.token,
+      });
+      setWorker(workerResponse.data);
+
+      if (workerResponse.data.id) {
+        const permissionResponse =
+          await PermissionService.getPermissionForWorker(
+            workerResponse.data.id,
+            { cancelToken: source.token }
+          );
+        setListPermission(permissionResponse.data);
+
+        const advanceResponse = await AdvanceService.getAllAdvances(
+          workerResponse.data.id
+        );
+        setListAdvances([...advanceResponse.data]);
+
+        const expenseResponse = await ExpenseService.getallexpense(
+          workerResponse.data.id
+        );
+        setExpense([...expenseResponse.data]);
       }
-    };
-    fetchWorkerInfo();
-    return () => {
+    } catch (error) {
+      if (!axios.isCancel(error)) {
+        // Handle the error here
+      }
+    } finally {
       source.cancel();
-    };
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [token]);
 
-  useEffect(() => {
-    const source = axios.CancelToken.source();
+  return { worker, listPermission, listAdvance, expense };
+};
 
-    const fetchPermission = async () => {
-      try {
-        const response = await PermissionService.getPermissionForWorker(
-          worker.id,
-          { cancelToken: source.token }
-        );
-        setListPermission(response.data);
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log("Request canceled", error.message);
-        } else {
-          console.log("An error occurred: ", error);
-        }
-      }
-    };
-
-    if (worker.id) {
-      fetchPermission();
-    }
-
-    return () => {
-      source.cancel();
-    };
-  }, [worker]);
-
-  useEffect(() => {
-    AdvanceService.getAllAdvances(worker.id).then((response) => {
-      setListAdvances([...response.data]);
-    });
-    return () => {};
-  }, [worker]);
-
-  useEffect(() => {
-    ExpenseService.getallexpense(worker.id).then((response) => {
-      console.log(response);
-      setExpense([...response.data]);
-    });
-    return () => {};
-  }, [worker]);
+const Widget = ({ type }) => {
+  const token = Cookies.get("token");
+  const { worker, listPermission, listAdvance, expense } = useFetchData(token);
+  let data;
   switch (type) {
     case "total":
       data = {

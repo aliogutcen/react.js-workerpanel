@@ -141,6 +141,18 @@ const DataPermission = () => {
 
   const hideModal = () => {
     setShow(false);
+    setPermission({
+      managerid: "",
+      workerid: "",
+      typeOfPermit: "",
+      startDate: "",
+      endDate: "",
+      numberOfDays: "",
+      name: "",
+      surname: "",
+    });
+    setValue([new Date(), new Date()]);
+    setSelectedOption(null);
   };
 
   const handleSubmit = (e) => {
