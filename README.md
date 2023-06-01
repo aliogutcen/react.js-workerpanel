@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Human Resources Management Worker Panel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is designed as a panel for employees in a workplace to easily carry out their transactions and requests. Employees can view their profile pages, request expenses, request leaves, request advances, and view their projects through this panel.
 
-## Available Scripts
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673815-a11de218-462d-4e6e-94b1-f0e59f14e7c5.jpg)
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+**Client:** React, Redux, Sass, MaterialUI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Server:** Spring, MongoDB
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- Project Components
+- Inbox
+- Mail service
+- Notification
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+Install project with npm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  git clone https://github.com/aliogutcen/worker-fe.git
+  cd my-project
+  npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Run Locally
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clone the project
 
-### `npm run eject`
+```bash
+  git clone https://link-to-project
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Go to the project directory
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+  cd my-project
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Install dependencies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+  npm install
+```
 
-## Learn More
+Start the server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+  npm run start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Run Docker
 
-### Code Splitting
+Clone the project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+  docker push aliogutcen/my-react-worker:20
+```
 
-### Analyzing the Bundle Size
+Running on Docker
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+  docker build -t <my-react-worker> .
+  docker run -p 3000:3000 <my-react-worker>
+```
 
-### Making a Progressive Web App
+## Usage/Examples
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```javascript
+import Component from "my-project";
 
-### Advanced Configuration
+function App() {
+  return <Component />;
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Screenshot
 
-### Deployment
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242674929-3d061c53-3a86-45dc-ae42-b8800ced380f.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673845-ecada0b2-1c8e-4040-8bab-75d98e85989c.jpg)
 
-### `npm run build` fails to minify
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673834-7f49d22b-e5ed-4b1b-8e91-8ac16d898940.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673840-16fb546b-6f18-48db-9ec8-2f161fe92d2a.jpg)
+
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673811-8b0af064-525b-4c4e-86ed-246ba9ac10b0.jpg)
+
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673820-87a0d838-9796-4a4e-aff2-f1d39549dd54.jpg)
+
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673824-7b5f99b1-ddfa-429f-8f7a-1acb19b200fc.jpg)
+
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673824-7b5f99b1-ddfa-429f-8f7a-1acb19b200fc.jpg)
+
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673828-4f277408-beb4-4bdf-a5b8-8b077449cc89.jpg)
+
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242673830-a31778ce-2bab-4ad1-bcc2-fc91f737f943.jpg)

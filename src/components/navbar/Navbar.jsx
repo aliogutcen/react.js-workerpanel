@@ -5,13 +5,22 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenOutlinedIcon from "@mui/icons-material/FullscreenOutlined";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import WorkerService from "../../service/WorkerService";
 import withAuth from "../../withAuth";
 import axios from "axios";
-const Navbar = () => {
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import MailIcon from "@mui/icons-material/Mail";
+import Badge from "@mui/material/Badge";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import { SidebarContext } from "../../context/SidebarContext";
+
+import MenuIcon from "@mui/icons-material/Menu";
+const Navbar = ({ props }) => {
   const token = Cookies.get("token");
   const [worker, setWorker] = useState({});
+  const { toggleSidebar } = useContext(SidebarContext);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -40,8 +49,12 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
+      <div className="menu-hidden">
+        <MenuIcon className="icon" onClick={toggleSidebar}></MenuIcon>
+      </div>
       <div className="wrapper">
         <div className="items">
+          <div className="item-menu"></div>
           <div className="item">
             <LanguageOutlinedIcon className="icon" />
             English
@@ -49,20 +62,28 @@ const Navbar = () => {
           <div className="item">
             <FullscreenOutlinedIcon className="icon" />
           </div>
-
+          <div className="item">
+            <Badge color="info" badgeContent={0} showZero>
+              <NotificationsNoneOutlinedIcon />
+            </Badge>
+          </div>
           <div className="item">
             <DarkModeOutlinedIcon className="icon" />
           </div>
+
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <div className="item">
-              <img
-                src={
-                  worker.image
-                    ? worker.image
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                }
-                className="avatar"
-              />
+              <Stack direction="row" spacing={2}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src={
+                    worker.image
+                      ? worker.image
+                      : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  }
+                  sx={{ width: 32, height: 32 }}
+                />
+              </Stack>
             </div>
           </Link>
         </div>

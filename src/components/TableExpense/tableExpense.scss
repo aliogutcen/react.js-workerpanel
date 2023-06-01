@@ -1,0 +1,107 @@
+.expense-table {
+  background-color: white;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  flex: 1.7;
+  display: flex;
+  flex-direction: column;
+
+  .team-member-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .project-li {
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+
+    list-style: none;
+  }
+  .project-names {
+    display: flex;
+    justify-content: space-between;
+    background-color: crimson;
+    padding: 0px 20px 0px 30px;
+    align-items: center;
+    width: 400px;
+    list-style: none;
+  }
+}
+.tables-expense {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+.project-team-h4 {
+  font-size: 18px;
+  font-weight: 600;
+
+  color: #fb6f92;
+  align-self: center;
+}
+.expense-tr-header {
+  text-align: center;
+  background-color: rgba(128, 128, 128, 0.075);
+  height: 30px;
+}
+.expense-header-th-1 {
+  color: rgba(128, 128, 128, 0.719);
+  font-weight: 500;
+  font-size: 14px;
+  width: 150px;
+  padding-left: 30px;
+  text-align: start;
+}
+.expense-header-th-2 {
+  color: rgba(128, 128, 128, 0.719);
+  font-weight: 500;
+  font-size: 14px;
+  width: 100px;
+  text-align: start;
+}
+.expense-header-th-3 {
+  color: rgba(128, 128, 128, 0.719);
+  font-weight: 500;
+  font-size: 14px;
+  width: 50px;
+
+  text-align: start;
+}
+
+.expense-table-td-1 {
+  font-weight: 400;
+  color: black;
+  font-size: 14px;
+  width: 150px;
+  text-align: start;
+  padding-left: 30px;
+  padding-top: 8px;
+}
+.expense-table-td-2 {
+  font-weight: 400;
+  color: black;
+  font-size: 14px;
+  width: 100px;
+  text-align: start;
+}
+.expense-table-td-3 {
+  font-weight: 400;
+  color: rgb(10, 10, 10);
+  font-size: 14px;
+  width: 50px;
+  text-align: start;
+}
+.expense-tr {
+  text-align: center;
+  padding: 10px 0;
+  background-color: rgba(216, 215, 215, 0.089);
+}
+.team-member-image {
+  width: 32px;
+  height: 32px;
+}
+.expense-table-td-3.pending {
+  background-color: rgba(255, 0, 0, 0.651);
+}

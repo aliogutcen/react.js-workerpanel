@@ -1,9 +1,10 @@
 import "./login.scss";
 import Bro from "../../assets/login.png";
 import AuthService from "../../service/AuthService";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import lottie from "lottie-web";
 const Login = () => {
   const [admin, setAdmin] = useState({
     email: "",
@@ -19,6 +20,21 @@ const Login = () => {
       setIsLoggedIn(true);
       window.location.replace("/");
     }
+  }, []);
+
+  const container = useRef(null);
+
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: container.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("../../login.json"),
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice", // Animasyonun boyutlandırılmasıyla ilgili ayarlar
+      },
+    });
   }, []);
 
   const handleSubmit = (e) => {
@@ -45,11 +61,11 @@ const Login = () => {
     !isLoggedIn && (
       <div className="login">
         <div className="left">
-          <img src={Bro} alt="" />
+          <div className="project-time-second-areass" ref={container}></div>
         </div>
         <div className="right">
           <div className="top">
-            <h1 className="title">HumanCo Login</h1>
+            <h1 className="title-login">HumanCo Login</h1>
           </div>
           <form className="form__content" onSubmit={handleSubmit}>
             <div className="form__box">
@@ -94,11 +110,15 @@ const Login = () => {
                 to="/forgot"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <span className="forgot">Forgot my password </span>
+                <p className="forgot">Forgot my password </p>
               </Link>
             </div>
             <div className="form__button">
-              <input type="submit" className="form__submit" value="Sign-In" />
+              <input
+                type="submit"
+                className="form__submit dene"
+                value="Sign-In"
+              />
             </div>
           </form>
         </div>

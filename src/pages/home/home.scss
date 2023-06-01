@@ -1,6 +1,55 @@
 .home {
   display: flex;
+
   .homeContainer {
+    background-color: rgb(248, 249, 251);
     flex: 10;
   }
+
+  .first-area {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+  }
+
+  .widgetsArea {
+    display: flex;
+    margin: 34px 40px 34px;
+    gap: 34px;
+    max-height: 100px;
+  }
+  .widgetsAreas {
+    display: flex;
+    margin: 0px 40px 34px;
+    gap: 34px;
+  }
+
+  .widgets {
+    display: flex;
+    justify-content: space-between;
+    gap: 34px;
+    flex: 2;
+  }
+}
+
+.areas {
+  display: flex;
+}
+
+.second-area {
+  flex: 0.8;
+  margin: 34px 40px 34px 0px;
+}
+
+.project-area {
+  display: flex;
+  margin: 0px 40px 34px;
+  gap: 34px;
+}
+.third-area {
+  display: flex;
+  margin: 0px 40px 34px;
+  margin-top: 0px;
+  gap: 34px;
+  max-height: 500px;
 }

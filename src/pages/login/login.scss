@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap");
 
 :root {
-  --submit-color: #ff0a54;
+  --submit-color: #b2b0f7;
   --white-color: #fff;
   --black-color: #000;
 
@@ -18,21 +18,23 @@ body {
 
 .login {
   display: flex;
-
   justify-content: space-around;
 
   .left {
+    position: fixed;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
     img {
       width: 100vh;
     }
   }
 
   .right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
+    position: fixed;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
 
     .top {
       display: flex;
@@ -41,9 +43,9 @@ body {
       justify-content: center;
       text-align: center;
 
-      .title {
+      .title-login {
         font-weight: bolder;
-        color: #ff0a54;
+        color: #b2b0f7;
         font-weight: bold;
         font-family: var(--body-font);
       }
@@ -108,10 +110,11 @@ body {
 
     .form__submit {
       padding: 0.875rem;
-      color: var(--white-color);
-      background-color: var(--submit-color);
+
+      background-color: #b2b0f7;
       cursor: pointer;
       transition: transform 0.3s;
+      width: 100px;
     }
 
     .form__submit:hover {
@@ -119,7 +122,7 @@ body {
     }
     .form__input:focus::placeholder {
       opacity: 0;
-      transition: 0.3s;
+      // transition: 0.3s;
     }
 
     .form__input:focus,
@@ -148,16 +151,46 @@ body {
         transform: translate(-7px, -7px);
       }
     }
-
-    @media screen and (max-width: 400px) {
-      .form__content,
-      .form__input {
-        width: 100%;
+  }
+  @media (max-width: 400px) {
+    .left {
+      display: none;
+    }
+    .right {
+      position: unset;
+      top: unset;
+      left: unset;
+      transform: unset;
+      max-width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .title {
+        font-weight: bolder;
+        color: #b2b0f7;
+        font-size: 32px;
+        font-family: var(--body-font);
       }
+    }
+    .form__content,
+    .form__input {
+      width: 80%;
+    }
+
+    .form__input {
+      position: absolute;
+      border: 2.5px solid var(--black-color);
+      background-color: var(--white-color);
+      width: 80%;
+      height: 80%;
+      z-index: 10;
+      transition: transform 0.3s;
     }
   }
 }
-
 .forgot {
   font-size: 12px;
+  color: #b2b0f7;
+  text-align: start;
 }

@@ -1,10 +1,8 @@
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 100 },
-
   {
     field: "expenditureType",
     headerName: "Expense Type",
-    width: 120,
+    width: 220,
   },
   {
     field: "requestDate",

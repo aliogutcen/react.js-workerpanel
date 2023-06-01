@@ -1,6 +1,4 @@
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 240 },
-
   {
     field: "advanceRequestType",
     headerName: "Advance Type",

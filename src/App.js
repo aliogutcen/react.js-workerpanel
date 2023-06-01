@@ -1,11 +1,12 @@
 import Home from "./pages/home/Home";
+import "./app.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "../src/styles/color.scss";
 import Permission from "./pages/permission/Permission";
 import PermissionAdd from "./pages/addpermission/Modal";
 import Login from "./pages/login/Login";
 import Advance from "./pages/advance/Advance";
-import Expence from "./pages/expense/Expense";
+import Expense from "./pages/expense/Expense";
 import Forgot from "./pages/forgot/Forgot";
 import Profile from "./pages/profile/Profile";
 function App() {
@@ -27,22 +28,35 @@ function App() {
             <Route index element={<Permission />} />
             <Route path="add">
               <Route index element={<PermissionAdd />} />
+
             </Route>
-          </Route>
-          <Route path="expense">
-            <Route index element={<Expence />} />
-            <Route path="add">
-              <Route index element={<PermissionAdd />} />
+            <Route path="profile">
+              <Route index element={<Profile />} />
+              <Route path="settings">
+                <Route index element={<Settings />} />
+              </Route>
             </Route>
-          </Route>
-          <Route path="advance">
-            <Route index element={<Advance />} />
-            <Route path="add">
-              <Route index element={<PermissionAdd />} />
+            <Route path="permission">
+              <Route index element={<Permission />} />
+              <Route path="add">
+                <Route index element={<PermissionAdd />} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route path="expense">
+              <Route index element={<Expense />} />
+              <Route path="add">
+                <Route index element={<PermissionAdd />} />
+              </Route>
+            </Route>
+            <Route path="advance">
+              <Route index element={<Advance />} />
+              <Route path="add">
+                <Route index element={<PermissionAdd />} />
+              </Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </SidebarProvider>
     </div>
   );
 }

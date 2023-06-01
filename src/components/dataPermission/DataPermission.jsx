@@ -85,7 +85,24 @@ const DataPermission = () => {
           worker.id,
           { cancelToken: source.token }
         );
-        setListPermission(response.data);
+
+        const sortedPermissions = response.data.sort((a, b) => {
+          if (
+            a.approvalStatus === "PENDING_APPROVAL" &&
+            b.approvalStatus !== "PENDING_APPROVAL"
+          ) {
+            return -1;
+          }
+          if (
+            b.approvalStatus === "PENDING_APPROVAL" &&
+            a.approvalStatus !== "PENDING_APPROVAL"
+          ) {
+            return 1;
+          }
+          return 0;
+        });
+
+        setListPermission(sortedPermissions);
       } catch (error) {
         if (axios.isCancel(error)) {
           console.log("Request canceled", error.message);
@@ -124,6 +141,18 @@ const DataPermission = () => {
 
   const hideModal = () => {
     setShow(false);
+    setPermission({
+      managerid: "",
+      workerid: "",
+      typeOfPermit: "",
+      startDate: "",
+      endDate: "",
+      numberOfDays: "",
+      name: "",
+      surname: "",
+    });
+    setValue([new Date(), new Date()]);
+    setSelectedOption(null);
   };
 
   const handleSubmit = (e) => {
@@ -165,20 +194,22 @@ const DataPermission = () => {
       >
         Add Permission
       </button>
-      <DataGrid
-        className="datagrid"
-        rows={listPermission}
-        columns={userColumns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 6,
+      {listPermission.length > 0 && (
+        <DataGrid
+          className="datagrid"
+          rows={listPermission}
+          columns={userColumns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 6,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[7]}
-        rowHeight={100}
-      />
+          }}
+          pageSizeOptions={[7]}
+          rowHeight={100}
+        />
+      )}
       <Modal show={show} handleClose={hideModal} onSubmit={handleSubmit}>
         <h2 className="h2-modal">Send permission request</h2>
         <div className="modalForm">

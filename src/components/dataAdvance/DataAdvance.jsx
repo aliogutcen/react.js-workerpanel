@@ -7,7 +7,6 @@ import Modal from "../../pages/addpermission/Modal";
 import Select from "react-select";
 import WorkerService from "../../service/WorkerService";
 import Cookies from "js-cookie";
-import PermissionService from "../../service/PermissionService";
 import AdvanceService from "../../service/AdvanceService";
 
 const DataAdvance = () => {
@@ -72,6 +71,22 @@ const DataAdvance = () => {
   }, [worker]);
   useEffect(() => {
     AdvanceService.getAllAdvances(worker.id).then((response) => {
+      const sortedPermissions = response.data.sort((a, b) => {
+        if (
+          a.approvalStatus === "PENDING_APPROVAL" &&
+          b.approvalStatus !== "PENDING_APPROVAL"
+        ) {
+          return -1;
+        }
+        if (
+          b.approvalStatus === "PENDING_APPROVAL" &&
+          a.approvalStatus !== "PENDING_APPROVAL"
+        ) {
+          return 1;
+        }
+        return 0;
+      });
+
       setListAdvances([...response.data]);
     });
     return () => {
@@ -141,20 +156,22 @@ const DataAdvance = () => {
       >
         Add Advance
       </button>
-      <DataGrid
-        className="datagrid"
-        rows={listAdvance}
-        columns={userColumns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 6,
+      {listAdvance.length > 0 && (
+        <DataGrid
+          className="datagrid"
+          rows={listAdvance}
+          columns={userColumns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 6,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[7]}
-        rowHeight={100}
-      />
+          }}
+          pageSizeOptions={[7]}
+          rowHeight={100}
+        />
+      )}
       <Modal show={show} handleClose={hideModal} onSubmit={handleSubmit}>
         <h2 className="h2-modal">Send Advance Request</h2>
         <div className="modalForm">

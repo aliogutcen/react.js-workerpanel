@@ -52,19 +52,59 @@ const DataExpense = () => {
     },
   ]);
   useEffect(() => {
-    fetch("https://api.exchangerate-api.com/v4/latest/USD")
-      .then((response) => response.json())
-      .then((data) => {
-        setCurrencies(Object.keys(data.rates));
-      })
-      .catch((error) => console.error(error));
+    const source = axios.CancelToken.source();
+
+    const fetchCurrencies = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.exchangerate-api.com/v4/latest/USD",
+          {
+            cancelToken: source.token,
+          }
+        );
+        setCurrencies(Object.keys(response.data.rates));
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          console.error(error);
+        }
+      }
+    };
+
+    fetchCurrencies();
+
+    return () => {
+      source.cancel();
+    };
   }, []);
+
   useEffect(() => {
-    WorkerService.getInfoForWorker(token).then((response) => {
-      console.log(response);
-      setWorker({ ...worker, ...response.data });
-    });
+    const source = axios.CancelToken.source();
+
+    const fetchWorkerInfo = async () => {
+      try {
+        const response = await WorkerService.getInfoForWorker(token, {
+          cancelToken: source.token,
+        });
+        console.log(response);
+        setWorker({ ...worker, ...response.data });
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          console.error(error);
+        }
+      }
+    };
+
+    fetchWorkerInfo();
+
+    return () => {
+      source.cancel();
+    };
   }, []);
+
   useEffect(() => {
     if (worker.managerid && worker.id) {
       setExpense((prevExpense) => ({
@@ -78,11 +118,45 @@ const DataExpense = () => {
   }, [worker]);
 
   useEffect(() => {
-    ExpenseService.getallexpense(worker.id).then((response) => {
-      console.log(response);
-      setListPermission([...response.data]);
-    });
+    const source = axios.CancelToken.source();
+
+    const fetchExpenses = async () => {
+      try {
+        const response = await ExpenseService.getallexpense(worker.id, {
+          cancelToken: source.token,
+        });
+        const sortedPermissions = response.data.sort((a, b) => {
+          if (
+            a.approvalStatus === "PENDING_APPROVAL" &&
+            b.approvalStatus !== "PENDING_APPROVAL"
+          ) {
+            return -1;
+          }
+          if (
+            b.approvalStatus === "PENDING_APPROVAL" &&
+            a.approvalStatus !== "PENDING_APPROVAL"
+          ) {
+            return 1;
+          }
+          return 0;
+        });
+
+        setListPermission([...response.data]);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Request canceled", error.message);
+        } else {
+          console.error(error);
+        }
+      }
+    };
+
+    if (worker.id) {
+      fetchExpenses();
+    }
+
     return () => {
+      source.cancel();
       console.log("useEffect clean-up");
     };
   }, [worker]);
@@ -122,14 +196,19 @@ const DataExpense = () => {
         alert("başarılı");
         window.location.replace("/expense");
       },
-      () => {}
+      (response) => {
+        if (response.response.status === 405) {
+          window.location.replace("/");
+        } else {
+          window.location.replace("/");
+        }
+      }
     );
     hideModal();
   };
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      // Eğer çok fazla dosya seçilirse, limiti aşan dosyaları dikkate alma
       if (images.length + acceptedFiles.length > 5) {
         alert("Toplamda 5 dosya seçebilirsiniz.");
         return;
