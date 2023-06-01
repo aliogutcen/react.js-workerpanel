@@ -4,12 +4,6 @@ This project is designed as a panel for employees in a workplace to easily carry
 
 ![App Screenshot](https://user-images.githubusercontent.com/85200452/242673815-a11de218-462d-4e6e-94b1-f0e59f14e7c5.jpg)
 
-## Tech Stack
-
-**Client:** React, Redux, Sass, MaterialUI
-
-**Server:** Spring, MongoDB
-
 ## Features
 
 - Project Components
