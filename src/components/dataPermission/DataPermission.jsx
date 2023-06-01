@@ -194,20 +194,22 @@ const DataPermission = () => {
       >
         Add Permission
       </button>
-      <DataGrid
-        className="datagrid"
-        rows={listPermission}
-        columns={userColumns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 6,
+      {listPermission.length > 0 && (
+        <DataGrid
+          className="datagrid"
+          rows={listPermission}
+          columns={userColumns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 6,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[7]}
-        rowHeight={100}
-      />
+          }}
+          pageSizeOptions={[7]}
+          rowHeight={100}
+        />
+      )}
       <Modal show={show} handleClose={hideModal} onSubmit={handleSubmit}>
         <h2 className="h2-modal">Send permission request</h2>
         <div className="modalForm">

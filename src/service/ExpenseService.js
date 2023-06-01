@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const CREATE_EXPENSE = "http://localhost/expense/expenses";
-const GET_ALL_EXPENSE = "http://localhost/expense/workers/";
+const CREATE_EXPENSE = "http://localhost:9097/api/v1/expense/expenses";
+const GET_ALL_EXPENSE = "http://localhost:9097/api/v1/expense/workers/";
 
 class ExpenseService {
   createExpense(expenses) {

@@ -40,7 +40,6 @@ const Home = () => {
             <div className="project-area">
               <ProjectTime />
               <Pendings />
-              <CircularProgressBar />
             </div>
           </div>
           <div className="second-area">

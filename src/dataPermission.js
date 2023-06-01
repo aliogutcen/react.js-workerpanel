@@ -1,6 +1,4 @@
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 220 },
-
   {
     field: "typeOfPermit",
     headerName: "Permission Type",
